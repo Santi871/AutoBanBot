@@ -47,6 +47,7 @@ class AutoBanBot:
         self.comments_limit = config.get('bot', 'comment_history_limit')
         self.submissions_limit = config.get('bot', 'submission_history_limit')
         self.bans_duration = config.get('bans', 'ban_length')
+        self.test_mode = config.getboolean('bot', 'test_mode')
 
     def run(self):
 
@@ -110,8 +111,9 @@ class AutoBanBot:
                     ban_reason += "/r/" + submission.subreddit
                     mod_reason += "/r/" + submission.subreddit
 
-                    sub_obj.add_ban(username, duration=self.bans_duration, ban_reason=mod_reason,
-                                    ban_message=ban_reason)
+                    if not self.test_mode:
+                        sub_obj.add_ban(username, duration=self.bans_duration, ban_reason=mod_reason,
+                                        ban_message=ban_reason)
 
                     print("Banned user: /u/" + username)
 
@@ -126,8 +128,9 @@ class AutoBanBot:
                     ban_reason += "/r/" + comment.subreddit
                     mod_reason += "/r/" + comment.subreddit
 
-                    sub_obj.add_ban(username, duration=self.bans_duration, ban_reason=mod_reason,
-                                    ban_message=ban_reason)
+                    if not self.test_mode:
+                        sub_obj.add_ban(username, duration=self.bans_duration, ban_reason=mod_reason,
+                                        ban_message=ban_reason)
 
                     print("Banned user: /u/" + username)
                     break
