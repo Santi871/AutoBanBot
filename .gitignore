@@ -20,8 +20,11 @@ lib64/
 parts/
 sdist/
 var/
+/oauth.ini
+/config.ini
 *.egg-info/
 .installed.cfg
+/.idea
 *.egg
 
 # PyInstaller
