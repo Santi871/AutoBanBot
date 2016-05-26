@@ -34,13 +34,13 @@ class CreateThread(threading.Thread):
 
 class AutoBanBot:
 
-    def __init__(self, useragent):
+    def __init__(self, useragent, config_name):
 
         self.useragent = useragent
 
         # Parse config
         config = configparser.ConfigParser()
-        config.read('config.ini')
+        config.read(config_name)
 
         self.subreddit = config.get('bot', 'subreddit')
         self.blacklisted_subs = config.get('bot', 'blacklisted_subs').split(',')
